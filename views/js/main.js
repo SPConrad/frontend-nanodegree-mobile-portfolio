@@ -449,9 +449,12 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+    ///these variables do not need to be set in the for loop, this was a huge
+    ///amount of wasted time and resources 
     var pizzaContainer = document.querySelectorAll(".randomPizzaContainer")
     var dx = determineDx(pizzaContainer[0], size);
     var newWidth = (pizzaContainer[0].offsetWidth + dx) + 'px';
+
     for (var i = 0; i < pizzaContainer.length; i++) {
       pizzaContainer[i].style.width = newWidth;
     }
@@ -502,6 +505,7 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  ///none of these need to be declared and set inside the for loop
   var items = document.querySelectorAll('.mover');
   var length = items.length;
   var scrollTop = document.body.scrollTop / 1250;
@@ -509,6 +513,9 @@ function updatePositions() {
 
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin(scrollTop + (i % 5));
+    ///transform lets the element slide around instead of "moving" it, a 
+    ///bizzare but important difference. Removes the FSL and greatly improves
+    ///framerate 
     items[i].style.transform = "translateX(" + (100 * phase) + 'px)';
 
   }
@@ -530,6 +537,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var col = 0;
   var numOfColumns = 7;
   var s = 256;
+  ///no need to have 200, no more than 30 - 40 are visible depending on browser
+  ///size, went with a few extra just in case. 
   for (var i = 0; i < 42; i++) {
     if ((i + 1) % numOfColumns == 0)
     {
@@ -540,6 +549,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
+    ///due to transformX being used I now assign this value directly to the element, instead of 
+    ///a reference value. This allows the use of transformX rather than updating style.left 
+    ///every time the element is moved. 
     elem.style.left = s * (i % numOfColumns) + 'px';
     elem.style.top = (col * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
