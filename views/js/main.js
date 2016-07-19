@@ -504,9 +504,13 @@ function updatePositions() {
 
   var items = document.querySelectorAll('.mover');
   var length = items.length;
+  var scrollTop = document.body.scrollTop / 1250;
+
+
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = Math.sin(scrollTop + (i % 5));
+    items[i].style.transform = "translateX(" + (100 * phase) + 'px)';
+
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -522,19 +526,24 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
-// Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
+  var col = 0;
+  var numOfColumns = 7;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 42; i++) {
+    if ((i + 1) % numOfColumns == 0)
+    {
+      col++;
+    }
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    elem.style.left = s * (i % numOfColumns) + 'px';
+    elem.style.top = (col * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
+
