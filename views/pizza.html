@@ -6,12 +6,111 @@
   <meta name="description" content="Fix-ified version of this page">
   <meta name="author" content="Sean Conrad">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/bootstrap-grid.css">
   <style> .img-responsive {
-  display: block;
-  width: 100% \9;
-  max-width: 100%;
-  height: auto;
+    display: block;
+    width: 100% \9;
+    max-width: 100%;
+    height: auto;
+  }
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .col-md-4, .col-md-6, .col-md-8, .col-md-12 {
+   position: relative;
+   min-height: 1px;
+   padding-left: 15px;
+   padding-right: 15px;
+ }
+
+ .mover {
+  position: fixed;
+  width: 256px;
+  z-index: -1;
+  will-change: transform;
+}
+
+ .col-md-push-3{
+  left: 25%;
+  }
+
+  .container:before,
+  .container:after,
+  .container-fluid:before,
+  .container-fluid:after,
+  .row:before,
+  .row:after {
+    content: " ";
+    display: table;
+  }
+  .clearfix:after,
+  .container:after,
+  .container-fluid:after,
+  .row:after {
+    clear: both;
+  }
+
+  .row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  form {
+  display: inline-block;
+}
+@media (min-width: 768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
+
+body {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  background: black;
+}
+
+input {
+  background: grey;
+  font-size: 18px;
+}
+
+
+
+.centered {
+  text-align: center;
+}
+
+#pizzaSize {
+  font-weight: 800;
+}
+
+
+ .container {
+  background-color: rgba(240, 60, 60, 0.8);
+}
+
+.randomPizzaContainer {
+  float: left;
+  display: flex;
+  will-change: transform;
+}
+
+.randomPizzaContainer:after {
+  content: "";
+  display: table;
+  clear:both;
 }
 </style>
 </head>
